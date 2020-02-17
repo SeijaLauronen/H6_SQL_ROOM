@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button save;
     private EditText editText;
     private ListView listView;
+    private TextView textViewTulos;
     private String str;
     private ArrayList<String> dataBaseArrayList;
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         this.editText=findViewById(R.id.editText);
         this.listView=findViewById(R.id.listView);
         this.save=findViewById(R.id.save);
+        this.textViewTulos=findViewById((R.id.textViewTulos));
 
         Tietokanta tietokanta=
                 Room.databaseBuilder(getApplicationContext(),Tietokanta.class,Tietokanta.NIMI).allowMainThreadQueries().build();
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         List<Taulu> tResults=tauluDao.getAllInDescenfingOrder();
+
 /*
         //TextView otsikko = findViewById(R.id.otsikko);
         //TextView teksti = findViewById(R.id.textiosa);
@@ -106,15 +109,15 @@ public class MainActivity extends AppCompatActivity {
         String text ="";
         while (i< tResults.size()){
 
-            text += tResults.get(i).id;
-            text += tResults.get(i).teksti;
+            text += tResults.get(i).id +" ";
+            text += tResults.get(i).teksti +" ";
             text += tResults.get(i).pvm;
+            text += "\n";
             i++;
 
 
         }
-
-
+        textViewTulos.setText(text);
 
 
     }
