@@ -14,7 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Kirjoita tallennettava tieto tähän"
+        android:inputType="textPersonName|text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,15 +33,17 @@
     <TextView
         android:id="@+id/textViewTulos"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:scrollbars="horizontal|vertical"
         android:scrollHorizontally="true"
         android:text="TextView"
         android:verticalScrollbarPosition="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/save" />
+        app:layout_constraintTop_toBottomOf="@+id/save"
+        app:layout_constraintVertical_bias="0.114" />
 
     <ListView
         android:id="@+id/listView"
