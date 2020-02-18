@@ -138,6 +138,8 @@ public void ShowResults(){
     listView.setAdapter(adapteri);
     //adapteri.clear(); //Lähtiskö tällä duplikaatit pois, no ei, kun ei näkynyt enää mitään
     //adapteri.addAll(tResults); //Eikun tämä olikin ylimääräinen, kun jo haettiin kaikki tuonne...jotenkin...
+    //Höh, vieläkin tulee jotain häikkää
+
     Integer i = 0;
     String text ="";
     while (i< tResults.size()){

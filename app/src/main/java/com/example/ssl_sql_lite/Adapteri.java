@@ -56,7 +56,7 @@ public class Adapteri extends ArrayAdapter<Taulu> {
 
  */
             lista.setText(Integer.toString(dataset.get(position).id)+":  " );
-            lista2.setText(dataset.get(position).teksti);
+            lista2.setText(dataset.get(position).teksti+"   ");
             lista3.setText(dataset.get(position).pvm);
 
         }
