@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewTulos;
     private String str;
     private ArrayList<String> dataBaseArrayList;
+    private Adapteri adapteri;
 
 
 
@@ -89,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         List<Taulu> tResults=tauluDao.getAllInDescenfingOrder();
-
+        adapteri = new Adapteri(this,R.layout.adapteri, tResults); //Mitähän tuohon viimeseen piti laittaa
+        listView.setAdapter(adapteri);
+        adapteri.addAll(tResults);
 /*
         //TextView otsikko = findViewById(R.id.otsikko);
         //TextView teksti = findViewById(R.id.textiosa);
