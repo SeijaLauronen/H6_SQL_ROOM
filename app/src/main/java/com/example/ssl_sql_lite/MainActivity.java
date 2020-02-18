@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -119,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
                     tauluDao.InsertTaulu(t); //Kaatui null objektiin, taulu-dao oli nulli.
                     editText.setText("");
                 }
+                else {
+                    Toast.makeText(MainActivity.this, "Tyhjää tekstiä ei tallenneta", Toast.LENGTH_SHORT).show();
+                }
                 ShowResults();
             }
 
@@ -146,6 +150,7 @@ public void ShowResults(){
 
     }
     textViewTulos.setText(text);
+    textViewTulos.setVisibility(View.INVISIBLE);//hävitetään tekstiboksi näkyvistä
 }
 
 }

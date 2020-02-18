@@ -30,10 +30,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
+
     <TextView
         android:id="@+id/textViewTulos"
         android:layout_width="0dp"
-        android:layout_height="160dp"
+        android:layout_height="30dp"
+        android:background="#00BCD4"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:scrollbars="horizontal|vertical"
         android:scrollHorizontally="true"
         android:text="TextView"
@@ -43,12 +47,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintVertical_bias="0.016" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:background="#FFEB3B"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
