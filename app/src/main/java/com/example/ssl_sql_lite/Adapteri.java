@@ -41,19 +41,23 @@ public class Adapteri extends ArrayAdapter<Taulu> {
 
             TextView lista = v.findViewById(R.id.textView);
             TextView lista2 = v.findViewById(R.id.textView2);
+            TextView lista3 = v.findViewById(R.id.textView3);
 
             //lista.setText(dataset.get(position).getTitle());
             //lista2.setText(dataset.get(position).getBody());
 
-
+/*
             String tmp="";
             Integer iTmp =0;
             iTmp=dataset.get(position).id;
             tmp= Integer.toString(iTmp);
 
             lista.setText(tmp);
-            lista.setText(dataset.get(position).teksti);
-            lista.setText(dataset.get(position).pvm);
+
+ */
+            lista.setText(Integer.toString(dataset.get(position).id));
+            lista2.setText(dataset.get(position).teksti);
+            lista3.setText(dataset.get(position).pvm);
 
         }
         return v;

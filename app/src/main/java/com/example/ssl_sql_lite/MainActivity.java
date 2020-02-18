@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+
+
 //Room:ia varten piti laittaa GRADLE:eenmjuutama rivi tänne:
 // SSL_SQL_Lite\app\build.gradle
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private String str;
     private ArrayList<String> dataBaseArrayList;
     private Adapteri adapteri;
+
 
 
 
@@ -62,24 +65,65 @@ public class MainActivity extends AppCompatActivity {
         //t.teksti="KISSA";
         //TauluDao tauluDao = tietokanta.tauluDao(); //Tässä skoupiossa jos se on, niin pitää initialisoida
         //tauluDao.InsertTaulu(t);
-        this.tauluDao=tietokanta.tauluDao();
+
+        /*   http://tutorials.jenkov.com/java-date-time/java-util-calendar.html
+        Calendar calendar = new GregorianCalendar();
+            int year       = calendar.get(Calendar.YEAR);
+            int month      = calendar.get(Calendar.MONTH);
+            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH); // Jan = 0, not 1
+            int dayOfWeek  = calendar.get(Calendar.DAY_OF_WEEK);
+            int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+            int weekOfMonth= calendar.get(Calendar.WEEK_OF_MONTH);
+
+            int hour       = calendar.get(Calendar.HOUR);        // 12 hour clock
+            int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY); // 24 hour clock
+            int minute     = calendar.get(Calendar.MINUTE);
+            int second     = calendar.get(Calendar.SECOND);
+            int millisecond= calendar.get(Calendar.MILLISECOND);
+        */
+
+
+        this.tauluDao=tietokanta.tauluDao(); //Täällä pitää alustaa, ettei ole null myöhemmin ->
         tauluDao.getAllInDescenfingOrder();
         str= "";
         this.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 str = editText.getText().toString(); //tähän ei saanut laittaa this eteen tuolle editTekstille!
-                Taulu t=new Taulu();
-                //t.teksti="KOIRA";
-                t.teksti=str;
-                //t.pvm="12.2.2020";
-                Calendar calendar = new GregorianCalendar();
-                t.pvm = calendar.getTime().toString();
-                tauluDao.InsertTaulu(t); //Kaatu null objektiin, taulu-dao on nulli.
+                if (!str.isEmpty()) {
+                    Taulu t = new Taulu();
+                    t.teksti = str;
+                    Calendar calendar = new GregorianCalendar();
+                    //t.pvm = calendar.getTime().toString(); //tällä tulee turhan pitkä litania
+
+                    int year       = calendar.get(Calendar.YEAR);
+                    int month      = calendar.get(Calendar.MONTH) +1; //HUOM! java aloittaa kk  numeroinnin 0:sta
+                    int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                    int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY); // 24 hour clock
+                    int minute     = calendar.get(Calendar.MINUTE);
+
+                    String strYear = Integer.toString(year);
+                    String strMonth = Integer.toString(month);
+                    if (strMonth.length()==1) strMonth ="0"+strMonth; //0 eteen, jos 1-numeroinen kk
+                    String strDayOfMonth = Integer.toString(dayOfMonth);
+                    if (strDayOfMonth.length()==1) strDayOfMonth ="0"+strDayOfMonth; //0 eteen, jos 1-numeroinen pv
+                    //t.pvm = Integer.toString(dayOfMonth) + "." + Integer.toString(month)+ "." + Integer.toString(year);
+                    String strHourOfDay = Integer.toString(hourOfDay);
+                    if (strHourOfDay.length()==1) strHourOfDay ="0"+strHourOfDay; //0 eteen, jos 1-numeroinen kk
+                    String strMinute =Integer.toString(minute);
+                    if (strMinute.length()==1) strMinute ="0"+strMinute; //0 eteen, jos 1-numeroinen kk
+
+                    String klo = strHourOfDay +":" + strMinute;
+
+                    t.pvm = strYear + "-" + strMonth +"-" + strDayOfMonth + " (" + klo + ")";
+                    tauluDao.InsertTaulu(t); //Kaatui null objektiin, taulu-dao oli nulli.
+                    editText.setText("");
+                }
                 ShowResults();
             }
 
         });
+
 
         ShowResults();
     }
@@ -88,7 +132,8 @@ public void ShowResults(){
     List<Taulu> tResults=tauluDao.getAllInDescenfingOrder();
     adapteri = new Adapteri(this,R.layout.adapteri, tResults); //Mitähän tuohon viimeseen piti laittaa
     listView.setAdapter(adapteri);
-    adapteri.addAll(tResults);
+    //adapteri.clear(); //Lähtiskö tällä duplikaatit pois, no ei, kun ei näkynyt enää mitään
+    //adapteri.addAll(tResults); //Eikun tämä olikin ylimääräinen, kun jo haettiin kaikki tuonne...jotenkin...
     Integer i = 0;
     String text ="";
     while (i< tResults.size()){
