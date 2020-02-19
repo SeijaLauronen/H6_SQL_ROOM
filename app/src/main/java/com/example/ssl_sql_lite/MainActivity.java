@@ -119,11 +119,12 @@ public class MainActivity extends AppCompatActivity {
                     t.pvm = strYear + "-" + strMonth +"-" + strDayOfMonth + " (" + klo + ")";
                     tauluDao.InsertTaulu(t); //Kaatui null objektiin, taulu-dao oli nulli.
                     editText.setText("");
+                    ShowResults(); //Siirrettiin tänne
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Tyhjää tekstiä ei tallenneta", Toast.LENGTH_SHORT).show();
                 }
-                ShowResults();
+                //ShowResults(); //siirretään pois täältä, ylemmäs
             }
 
         });
